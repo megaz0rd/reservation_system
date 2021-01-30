@@ -8,4 +8,5 @@ app_name = 'conference_room'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('new', views.add_room, name='add-room')
 ]

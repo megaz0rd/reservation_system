@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Add new room:</p>
+<form action="{% url 'conference_room:add-room' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add room</button>
+</form>
+
+{% endblock content %}

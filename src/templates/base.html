@@ -6,25 +6,26 @@
 </head>
 <style>
     footer {
-  text-align: center;
-  padding: 3px;
-  background-color: lightskyblue;
-  color: white;
-}
+        text-align: center;
+        padding: 3px;
+        background-color: lightskyblue;
+        color: white;
+    }
 </style>
 
 <body>
-    <p>
-        <a href="{% url 'conference_room:index' %}">Main page</a> -
-   </p>
+<p>
+    <a href="{% url 'conference_room:index' %}">Main page</a> -
+    <a href="{% url 'conference_room:add-room' %}">Add room</a>
+</p>
 
 {% block content %}
 
 {% endblock content %}
 
 <footer>
-  <p>Author: Adam Kropiewnicki</p>
-  <p><a href="mailto:akropiewnicki@gmail.com">akropiewnicki@gmail.com</a></p>
+    <p>Author: Adam Kropiewnicki</p>
+    <p><a href="mailto:akropiewnicki@gmail.com">akropiewnicki@gmail.com</a></p>
 </footer>
 
 </body>
