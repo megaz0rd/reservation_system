@@ -28,9 +28,11 @@
         Projector: {% if room.projector == 1 %} Yes
         {% else %} No
         {% endif %} /
-        tu bedzie info o dostępności</td>
-        tu bedzie button (/room/modify/{id}/)
-        tu bedzie button (/room/delete/{id})
+        tu bedzie info o dostępności
+        <a href="{% url 'conference_room:edit-room' room.id %}"><button>
+            Edit</button></a>
+        <a href="{% url 'conference_room:delete-room' room.id %}"><button>
+            Delete</button></a>
         tu bedzie button (/room/reserve/{id})</li>
     {% empty %}
     There is no room yet.

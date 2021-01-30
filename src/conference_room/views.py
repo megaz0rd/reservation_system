@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView
 
 from .models import ConferenceRoom
@@ -11,7 +11,6 @@ class index(ListView):
     context_object_name = 'rooms'
 
 
-
 def add_room(request):
     if request.method != 'POST':
         form = RoomForm()
@@ -21,12 +20,49 @@ def add_room(request):
             form.save()
             return redirect('conference_room:index')
 
-    context = {'form': form}
+    context = {
+        'form': form
+    }
     return render(request, 'add_room.html', context)
 
+
 def room_detail(request, id):
-    rooms = ConferenceRoom.objects.get(pk=id)
+    rooms = get_object_or_404(ConferenceRoom, pk=id)
+
     context = {
         'rooms': rooms
     }
     return render(request, 'room_detail.html', context)
+
+
+def edit_room(request, id):
+    room = get_object_or_404(ConferenceRoom, pk=id)
+    if request.method != 'POST':
+        form = RoomForm(instance=room)
+    else:
+        form = RoomForm(instance=room, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('conference_room:index')
+
+    context = {
+        'room': room, 'form': form
+    }
+    return render(request, 'edit_room.html', context)
+
+
+def delete_room(request, id):
+    '''
+
+    Delete object with confirm
+
+    '''
+    room = get_object_or_404(ConferenceRoom, pk=id)
+    if request.method == 'POST':
+        room.delete()
+        return redirect('conference_room:index')
+
+    context = {
+        'room': room
+    }
+    return render(request, 'delete_room.html', context)

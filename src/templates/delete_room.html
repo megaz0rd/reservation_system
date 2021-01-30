@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="." method="POST">
+      {% csrf_token %}
+    <h1>Do You want to delete the room "{{ room.name }}"?</h1>
+    <p><input type="submit" value="Yes" />
+        <a href="{% url 'conference_room:index' %}">Cancel</a></p>
+</form>
+
+{% endblock content %}
