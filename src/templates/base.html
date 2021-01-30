@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <title>Book your conference room</title>
 </head>
+<style>
+    footer {
+  text-align: center;
+  padding: 3px;
+  background-color: lightskyblue;
+  color: white;
+}
+</style>
+
 <body>
+    <p>
+        <a href="{% url 'conference_room:index' %}">Main page</a> -
+   </p>
 
 {% block content %}
 
 {% endblock content %}
+
+<footer>
+  <p>Author: Adam Kropiewnicki</p>
+  <p><a href="mailto:akropiewnicki@gmail.com">akropiewnicki@gmail.com</a></p>
+</footer>
 
 </body>
 </html>
