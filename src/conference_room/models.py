@@ -11,13 +11,13 @@ class ConferenceRoom(models.Model):
 
 
 class Booking(models.Model):
-    room_id = models.ForeignKey(ConferenceRoom, on_delete=models.CASCADE,
-                                related_name='booking')
-    date = models.DateTimeField()
+    room = models.ForeignKey(ConferenceRoom, on_delete=models.CASCADE,
+                             related_name='booking')
+    date = models.DateField()
     comment = models.TextField()
 
     class Meta:
-        unique_together = ('room_id', 'date')
+        unique_together = ('room', 'date')
 
     def __str__(self):
-        return self.date
+        return f'{self.date}'

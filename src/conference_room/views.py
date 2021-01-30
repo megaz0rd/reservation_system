@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView
 
 from .models import ConferenceRoom
-from .forms import RoomForm
+from .forms import BookingForm, RoomForm
 
 
 class index(ListView):
@@ -66,3 +66,22 @@ def delete_room(request, id):
         'room': room
     }
     return render(request, 'delete_room.html', context)
+
+
+def book_room(request, id):
+    room = get_object_or_404(ConferenceRoom, pk=id)
+    initial_data = {
+        'room': room.id
+    }
+    if request.method != 'POST':
+        form = BookingForm(initial=initial_data)
+    else:
+        form = BookingForm(initial=initial_data, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('conference_room:index')
+
+    context = {
+        'room': room, 'form': form,
+    }
+    return render(request, 'book_room.html', context)
