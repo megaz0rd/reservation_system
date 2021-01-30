@@ -21,6 +21,22 @@
 
 {% block content %}
 
+<ul>
+    {% for room in rooms %}
+    <li> <a href="{% url 'conference_room:room-detail' room.id %}">
+        {{ room.name }}</a>, {{ room.capacity }} seats /
+        Projector: {% if room.projector == 1 %} Yes
+        {% else %} No
+        {% endif %} /
+        tu bedzie info o dostępności</td>
+        tu bedzie button (/room/modify/{id}/)
+        tu bedzie button (/room/delete/{id})
+        tu bedzie button (/room/reserve/{id})</li>
+    {% empty %}
+    There is no room yet.
+    {% endfor %}
+</ul>
+
 {% endblock content %}
 
 <footer>

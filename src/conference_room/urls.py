@@ -7,6 +7,7 @@ from . import views
 app_name = 'conference_room'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('new', views.add_room, name='add-room')
+    path('', views.index.as_view(), name='index'),
+    path('new/', views.add_room, name='add-room'),
+    path('<int:id>', views.room_detail, name='room-detail'),
 ]
