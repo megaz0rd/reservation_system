@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form action="{% url 'conference_room:book-room' room.id %}" method='post'>
+    {% csrf_token %}
+    <h3>Book "{{ room.name }}"</h3>
+    {{ form.as_p }}
+    <button name="submit">Book room</button>
+</form>
+<p></p>
+
+{% endblock content %}

@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<p>Add new room:</p>
 <form action="{% url 'conference_room:add-room' %}" method='post'>
     {% csrf_token %}
+    <h3>Add new room:</h3>
     {{ form.as_p }}
     <button name="submit">Add room</button>
 </form>

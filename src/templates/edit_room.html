@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<p>Edit room:</p>
-
 <form action="{% url 'conference_room:edit-room' room.id %}" method='post'>
     {% csrf_token %}
+    <h3>Edit "{{ room.name }}"</h3>
     {{ form.as_p }}
     <button name="submit">Save changes</button>
 </form>
+<p></p>
 
 {% endblock %}

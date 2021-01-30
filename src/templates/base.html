@@ -33,7 +33,8 @@
             Edit</button></a>
         <a href="{% url 'conference_room:delete-room' room.id %}"><button>
             Delete</button></a>
-        tu bedzie button (/room/reserve/{id})</li>
+        <a href="{% url 'conference_room:book-room' room.id %}"><button>
+            Book</button></a>
     {% empty %}
     There is no room yet.
     {% endfor %}
