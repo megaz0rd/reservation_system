@@ -20,4 +20,4 @@ class Booking(models.Model):
         unique_together = ('room', 'date')
 
     def __str__(self):
-        return f'{self.date}'
+        return str(self.date)
