@@ -2,13 +2,23 @@
 
 {% block content %}
 
-
-<form action="{% url 'conference_room:book-room' room.id %}" method='post'>
+<form action="" method='post'>
     {% csrf_token %}
     <h3>Book "{{ room.name }}"</h3>
     {{ form.as_p }}
     <button name="submit">Book room</button>
+    <a href="{% url 'conference_room:room-detail' room.id %}">Cancel</a>
 </form>
-<p></p>
+
+{% if booking %}
+
+<h5>Upcoming bookings:</h5>
+<ol>
+    {% for book in booking %}
+    <li>{{ book.date }} comment: {{ book.comment }}</li>
+    {% endfor %}
+</ol>
+
+{% endif %}
 
 {% endblock content %}

@@ -2,4 +2,34 @@
 
 {% block content %}
 
+<p>
+    {% if room %}
+    Our conference room "{{ room.name }}" has {{ room.capacity }} seats.<br>
+    Projector is
+    {% if room.projector == 1 %} available
+    {% else %} unavailable
+    {% endif %}
+    in this room. <br>
+    {% endif %}
+</p>
+
+<h5>Upcoming bookings:</h5>
+
+    <ol>
+        {% for book in booking %}
+        <li>{{ book.date }} comment: {{ book.comment }}</li>
+        {% empty %}
+        No upcoming bookings
+        {% endfor %}
+    </ol>
+
+<p>
+    <a href="{% url 'conference_room:edit-room' room.id %}"><button>
+            Edit room</button></a>
+    <a href="{% url 'conference_room:delete-room' room.id %}"><button>
+            Delete room</button></a>
+    <a href="{% url 'conference_room:book-room' room.id %}"><button>
+            Book room</button></a>
+</p>
+
 {% endblock content %}

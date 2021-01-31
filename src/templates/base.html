@@ -5,30 +5,71 @@
     <title>Book your conference room</title>
 </head>
 <style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    ul li {
+        float: left;
+    }
+
+    ul li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    ul li a:hover:not(.active) {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #4CAF50;
+    }
+
     footer {
         text-align: center;
         padding: 3px;
-        background-color: lightskyblue;
+        background-color: #333;
+        color: white;
+    }
+
+    footer a:link {
         color: white;
     }
 </style>
 
 <body>
-<p>
-    <a href="{% url 'conference_room:index' %}">Main page</a> -
-    <a href="{% url 'conference_room:add-room' %}">Add room</a>
-</p>
+<ul>
+  <li><a class=active href="{% url 'conference_room:index' %}">Main page</a></li>
+  <li><a href="{% url 'conference_room:add-room' %}">Add room</a></li>
+  <li><a href="{% url 'conference_room:search-room' %}">Search room</a></li>
+</ul>
 
 {% block content %}
 
-<ul>
+
+<ol>
     {% for room in rooms %}
+
     <li> <a href="{% url 'conference_room:room-detail' room.id %}">
-        {{ room.name }}</a>, {{ room.capacity }} seats /
-        Projector: {% if room.projector == 1 %} Yes
-        {% else %} No
-        {% endif %} /
-        tu bedzie info o dostępności
+        {{ room.name }}</a>, {{ room.capacity }} seats
+        <b>{% if room.projector == 1 %} with
+        {% else %} without
+            {% endif %}</b> projector. Status:
+        {% for obj in room.booking.all %}
+        {% if obj.date == today %}
+        <i style="color:red;">Booked</i>
+        {% else %}
+        <i style="color: limegreen;">Free</i>
+        {% endif %}
+        {% endfor %}
         <a href="{% url 'conference_room:edit-room' room.id %}"><button>
             Edit</button></a>
         <a href="{% url 'conference_room:delete-room' room.id %}"><button>
@@ -38,13 +79,12 @@
     {% empty %}
     There is no room yet.
     {% endfor %}
-</ul>
+</ol>
 
 {% endblock content %}
 
 <footer>
-    <p>Author: Adam Kropiewnicki</p>
-    <p><a href="mailto:akropiewnicki@gmail.com">akropiewnicki@gmail.com</a></p>
+    Author: <a href="mailto:akropiewnicki@gmail.com"> Adam Kropiewnicki</a>
 </footer>
 
 </body>

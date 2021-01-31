@@ -6,7 +6,8 @@
     {% csrf_token %}
     <h3>Add new room:</h3>
     {{ form.as_p }}
-    <button name="submit">Add room</button>
+    <p><button name="submit">Add room</button>
+    <a href="{% url 'conference_room:index' %}">Cancel</a></p>
 </form>
 
 {% endblock content %}
